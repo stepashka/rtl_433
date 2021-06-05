@@ -90,10 +90,8 @@ def rtl_433_probe():
                 else:
                     graphite.push(path + '.battery', 0, now)
 
-            if "humidity" in data:
-                graphite.push(path + '.humidity', data["humidity"], now)
-
-            graphite.push(path + '.temperature', data["temperature_C"], now)
+            for key in data:
+                graphite.push(path + '.' + key, data[key], now)
 
             # graphite.commit()  # for Pickle protocol only
 
